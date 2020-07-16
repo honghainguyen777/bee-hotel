@@ -32,7 +32,6 @@ class Main extends Component {
                             <Route exact path="/restaurant" component={Restaurant} />
                             <Route exact path="/contact" component={Contact} />
                             <Route exact path="/about" component={About} />
-                            <Redirect to="/home" />
                         </Switch>
                     </CSSTransition>
                 </TransitionGroup>

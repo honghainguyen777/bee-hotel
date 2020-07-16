@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+.btn-login {
+  border-radius: 30px;
+  color: #fff;
+  background-image: linear-gradient(to right, #4568dc, #b06ab3);
+  padding: 10px;
+  cursor: pointer;
+  width: 200px;
+  border: none !important;
+}
+
+.btn-login:hover {
+  color: #fff;
+  background-image: linear-gradient(to right, #b06ab3, #4568dc)
+}
+
+.btn-register {
+  border-radius: 30px;
+  color: #19547b;
+  background-color: #fff;
+  padding: 10px;
+  width: 200px;
+  cursor: pointer;
+  border: 2px solid #19547b !important
+}
+
+.btn-register:hover {
+  color: #fff;
+  border: none !important;
+  background-image: linear-gradient(to right, #ffd89b, #19547b)
+}
