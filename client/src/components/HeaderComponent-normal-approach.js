@@ -72,6 +72,8 @@ class Header extends Component {
         event.preventDefault();
     }
 
+    validate()
+
     renderLogin() {
         return (
             <Modal show={this.state.isModalLoginOpen} onHide={this.toggleLoginModal}>

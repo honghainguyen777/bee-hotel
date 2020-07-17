@@ -27,10 +27,25 @@ module.exports = app => {
     });
 
     app.post(
-        '/auth/local',
-        passport.authenticate('local'),
+        '/auth/login',
+        passport.authenticate('local', { failureRedirect: '/home', failureFlash: 'Invalid username or password.'}),
         (req, res) => {
             res.redirect('/home');
         }
+    );
+
+    app.post(
+        '/auth/signup', passport.authenticate('local-signup', {
+            successRedirect: '/home',
+            failureRedirect: '/home',
+            failureFlash: {
+                type: 'messageFailure',
+                message: 'Username has already taken.'
+            },
+            successFlash: {
+                type: 'messageSuccess',
+                message: 'Thank you for signing up!' 
+            }
+      })
     );
 };
