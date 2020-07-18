@@ -15,6 +15,8 @@ import { Model } from 'mongoose';
 // import Button from '@material-ui/core/Button';
 // import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
+import LoginForm from './authentication/LoginForm';
+import SignupForm from './authentication/SignupForm';
 
 
 
@@ -24,12 +26,6 @@ class Header extends Component {
         this.state = {
             isModalLoginOpen: false,
             isModalSignupOpen: false,
-            signupUsername: '',
-            signupPassword: '',
-            signupPwConfirm: '',
-            signupEmail: '',
-            signupFirstname: '',
-            signupLastname: ''
         };
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
         this.toggleSignupModal = this.toggleSignupModal.bind(this);
@@ -55,18 +51,11 @@ class Header extends Component {
     }
 
     handleSignup(event) {
-        if (this.state.signupPassword !== this.state.signupPwConfirm) {
+        console.log(this.props);
+        if (this.props.signupPassword !== this.state.signupPwConfirm) {
             alert("Passwords did not match. Try again");
         }
         else {
-            let data = {
-                username: this.state.signupUsername,
-                password: this.state.signupPassword,
-                email: this.state.signupEmail,
-                firstname: this.state.signupFirstname,
-                lastname: this.state.signupLastname
-            }
-            console.log(data);
             this.toggleSignupModal();
         }
         event.preventDefault();
@@ -79,39 +68,7 @@ class Header extends Component {
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="ml-5 mr-5">
-                    <Form onSubmit={this.handleLogin}>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-user fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="text" placeholder="Username" required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter your username
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-key fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="password" placeholder="Password" required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter your password
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group className="text-center">
-                            <Button type="submit" className="text-center btn-login">
-                                Login
-                            </Button>
-                        </Form.Group>
-                    </Form>
+                    <LoginForm handleLogin={this.handleLogin} />
                     <div className="row m-0 p-0">
                         <div className="col-4">
                             <hr />
@@ -144,91 +101,7 @@ class Header extends Component {
                     <Modal.Title>Register</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="ml-5 mr-5">
-                    <Form onSubmit={this.handleSignup}>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-user fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="text" placeholder="Username" name="username" onChange={e => this.setState({signupUsername: e.target.value})} required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter a username
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-key fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="password" placeholder="Password" name="password" onChange={e => this.setState({signupPassword: e.target.value})} required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter your password
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-key fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="password" placeholder="Confirmation" name="confirmation" onChange={e => this.setState({signupPwConfirm: e.target.value})} required />
-                                <Form.Control.Feedback type="invalid">
-                                    Repeat your password
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-user fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="text" placeholder="Email" name="email" onChange={e => this.setState({signupEmail: e.target.value})} required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter an email
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-user fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="text" placeholder="First name" name="firstname" onChange={e => this.setState({signupFirstname: e.target.value})} required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter your first name
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>
-                                        <span className="fa fa-user fa-lg"></span>   
-                                    </InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="text" placeholder="Last name" name="lastname" onChange={e => this.setState({signupLastname: e.target.value})} required />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter your last name
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group className="text-center">
-                            <Button type="submit" className="text-center btn-login">
-                                Register
-                            </Button>
-                        </Form.Group>
-                    </Form>
+                    <SignupForm handleSignup={this.handleSignup} />
                     <div className="row m-0 p-0">
                         <div className="col-4">
                             <hr />
@@ -242,7 +115,7 @@ class Header extends Component {
                     </div>
                     <div className="text-center">
                         <Button href="/auth/google" className="text-center btn-register">
-                            Login With Google
+                            Signup With Google
                         </Button>
                     </div>
                 </Modal.Body>

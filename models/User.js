@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const passportLocalMongoose = require('passport-local-mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 // const bcrypt   = require('bcrypt-nodejs');
 
 const userSchema = new Schema({
@@ -8,18 +8,9 @@ const userSchema = new Schema({
         username: String,
         email: String,
         password: String,
-        firstname: {
-            type: String,
-            default: ''
-        },
-        lastname: {
-            type: String,
-            default: ''
-        },
-        admin: {
-            type: Boolean,
-            default: false
-        }
+        firstname: String,
+        lastname: String,
+        admin: Boolean
     },
     google: {
         id: String,
@@ -28,10 +19,7 @@ const userSchema = new Schema({
         firstname: String,
         lastname: String,
         picture: String,
-        admin: {
-            type: Boolean,
-            default: false
-        }
+        admin: Boolean
     }
 });
 
@@ -45,6 +33,6 @@ const userSchema = new Schema({
 //     return bcrypt.compareSync(password, this.local.password);
 // };
 
-// User.plugin(passportLocalMongoose);
+// userSchema.plugin(passportLocalMongoose);
 
-mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema);

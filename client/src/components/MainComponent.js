@@ -9,9 +9,11 @@ import About from './AboutComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import * as actions from '../actions';
 
 // Animation
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
 
 
 class Main extends Component {
@@ -41,4 +43,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default connect(null, actions)(Main);

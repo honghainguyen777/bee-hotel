@@ -1,1 +1,3 @@
-export const FETCH_USER = 'fetch_user';
+export const FETCH_USER = 'FETCH_USER';
+export const LOGIN_FORM_SUBMIT = 'LOGIN_FORM_SUBMIT';
+export const SIGNUP_FORM_SUBMIT = 'SIGNUP_FORM_SUBMIT';

@@ -29,21 +29,30 @@ passport.use(
         async (accessToken, refreshToken, profile, done) => {
             const existingUser = await User.findOne({ 'google.id': profile.id });
             if (!existingUser) {
-                const user = await new User({
-                    'google.id': profile.id,
-                    'google.name': profile.displayName,
-                    'google.firstname': profile.name.givenName,
-                    'google.lastname': profile.name.familyName,
-                    'google.email': profile.emails[0].value,
-                    'google.picture': profile.photos[0].value
-                }).save();
+                // const user = await new User({
+                //     'google.id': profile.id,
+                //     'google.name': profile.displayName,
+                //     'google.firstname': profile.name.givenName,
+                //     'google.lastname': profile.name.familyName,
+                //     'google.email': profile.emails[0].value,
+                //     'google.picture': profile.photos[0].value,
+                // }).save();
+                var newUser = new User();
+                newUser.google.id = profile.id;
+                newUser.google.name = profile.displayName;
+                newUser.google.firstname = profile.name.givenName;
+                newUser.google.lastname = profile.name.familyName;
+                newUser.google.email = profile.emails[0].value;
+                newUser.google.picture = profile.photos[0].value;
+                newUser.google.admin = false;
+                newUser.save();
             }
-            done(null, existingUser);
+            return done(null, existingUser);
         }
     )
 );
 
-passport.use(
+passport.use('local-login',
     new LocalStrategy((username, password, done) => {
         User.findOne({ 'local.username': username }, (err, user) => {
             if (err) { return done(err); }
